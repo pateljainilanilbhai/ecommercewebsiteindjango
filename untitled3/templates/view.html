@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class='text-center'>
+          <h1>{{ title }}</h1>
+          <h1>Hello, Please contact us for your queries.</h1>
+      </div>
+      <div class='container'>
+      <div class='row'  style="position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 650px;
+right: 0;">
+        <div class='col'>
+
+            <div class='col-md-6 col-12 mx-auto'>
+              <p>{{ content }}</p>
+            <form class='contact-form' method='POST' action='{% url "contact" %}'> {% csrf_token %}
+              {{ form.as_p }}
+              <button type='submit' class='btn btn-default'>Submit</button>
+            </form>
+
+
+            <!-- <form method='POST'> {% csrf_token %}
+              <input type='text' class='form-control' placeholder="Name" name='fullname'>
+              <input type='email' class='form-control' placeholder="Email" name='email'>
+              <textarea name='content' class='form-control' placeholder="Your content"></textarea>
+              <button type='submit' class='btn btn-default'>Submit</button>
+            </form> -->
+            </div>
+        </div>
+      </div>
+      </div>
+
+{% endblock %}

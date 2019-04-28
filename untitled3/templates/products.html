@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <style>.mySlides {display:none;}</style>
+
+     <div class="" style="background: lavenderblush">
+     <center>
+         {% for product in products %}
+
+            <div style="align-self: center">
+                <div class="mySlides">
+                <div >
+                    <div class="product" style="background-image: url('.{{ MEDIA_URL }}{{ product.image }}')"></div>
+
+                    <h3 class="text-center">{{ product.name }}</h3>
+                    <p class="product-description text-center">{{ product.description }}</p>
+                    <p class="text-center">€{{ product.price }}</p>
+
+
+                </div>
+                </div>
+            </div>
+
+        {% endfor %}
+     </center>
+     </div>
+
+
+    <script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}
+  x[myIndex-1].style.display = "block";
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row row-flex">
+        {% for product in products %}   
+        
+            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
+                
+                <div class="panel-body">
+                    <div class="product" style="background-image: url('.{{ MEDIA_URL }}{{ product.image }}')"></div>
+
+                    <h3 class="text-center">{{ product.name }}</h3>
+                    <p class="product-description text-center">{{ product.description }}</p>
+                    <p class="text-center">€{{ product.price }}</p>
+                    
+                    <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input name="quantity" type="number" min="1" max="999" class="form-control form-size" placeholder="Quantity">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit">Add</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+ <footer>
+        <div class="container text-center" >
+            <a href="http://127.0.0.1:8000/Query/">contact us</a>
+            <p>made by:jainil patel and Yash Mehta</p>
+        </div>
+    </footer>
+{% endblock %}
+
